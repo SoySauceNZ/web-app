@@ -79,14 +79,7 @@ const CustomAccordion = withStyles({
     expanded: {},
 })(Accordion);
 
-const severity = {
-    'Non-Injury Crash': '0.0',
-    'Minor Crash': '0.33',
-    'Serious Crash': '0.66',
-    'Fatal Crash': '1.0',
-};
-
-const weatherOptions = {
+export const weatherOptions = {
     Fine: 'F',
     'Light rain': 'LR',
     'Heavy rain': 'HR',

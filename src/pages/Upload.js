@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Grid, Typography, withStyles } from '@material-ui/core';
+import { Grid, Typography, withStyles, Box } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-
 import example from '../assets/191.png';
+import BackButton from '../components/BackButton';
 import InputSelector from '../components/InputSelector';
 import SliderSelector from '../components/SliderSelector';
-import BackButton from '../components/BackButton';
+import { weatherOptions } from './Home';
 
 const styles = (theme) => ({
     cardTitle: {
@@ -21,10 +28,11 @@ const styles = (theme) => ({
     },
 });
 
-const weatherOptions = {
-    Fine: 'F',
-    'Light rain': 'LR',
-    'Heavy rain': 'HR',
+const severityBreakpoints = {
+    'Non-Injury Crash': '0.0',
+    'Minor Crash': '0.33',
+    'Serious Crash': '0.66',
+    'Fatal Crash': '1.0',
 };
 
 const weatherArray = Object.keys(weatherOptions);
@@ -125,9 +133,38 @@ const Upload = ({ classes }) => {
                     onChange={handleSpeedLimitChange}
                     onChangeCommitted={handleIlluminationChangeCommited}
                 />
-                <Typography className={classes.cardTitle} variant="h6">
+                <Typography
+                    className={classes.cardTitle}
+                    variant="h6"
+                    align="center"
+                >
                     Severity: {severity}
                 </Typography>
+                <Box pt={2}>
+                    <TableContainer component={Paper}>
+                        <Table
+                            className={classes.table}
+                            aria-label="simple table"
+                        >
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Severity</TableCell>
+                                    <TableCell>Prediction</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {Object.keys(severityBreakpoints).map((key) => (
+                                    <TableRow key={key}>
+                                        <TableCell>{key}</TableCell>
+                                        <TableCell>
+                                            {severityBreakpoints[key]}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
             </Grid>
             <BackButton />
         </Grid>
