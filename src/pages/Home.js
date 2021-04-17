@@ -113,7 +113,7 @@ const Home = () => {
     });
 
     const generateDataUrl = () => {
-        const baseUrl = process.env.GEOJSON_BASE_URL;
+        const baseUrl = process.env.REACT_APP_GEOJSON_BASE_URL;
         const weather = weatherOptions[state.weather];
         const lighting = lightingConditions[state.lighting];
         const filename = `${weather}_${lighting}_${state.speedLimit}`;

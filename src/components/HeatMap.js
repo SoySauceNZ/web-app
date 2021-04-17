@@ -51,24 +51,33 @@ const HeatMap = ({ classes, data, type, center, zoom }) => {
                     paint: {
                         'heatmap-weight': {
                             property: 'severity',
-                            type: 'identity',
+                            type: 'exponential',
+                            stops: [
+                                [0, 0],
+                                [0.1, 0.2],
+                                [0.2, 0.4],
+                                [0.4, 0.8],
+                                [0.8, 1.6],
+                                [1, 3.2],
+                            ],
                         },
                         'heatmap-intensity': {
                             stops: [
                                 [11, 1],
-                                [15, 3],
+                                [15, 1],
                             ],
                         },
                         'heatmap-radius': {
                             stops: [
                                 [11, 40],
-                                [15, 60],
+                                [15, 100],
+                                [30, 250],
                             ],
                         },
                         'heatmap-opacity': {
                             default: 1,
                             stops: [
-                                [14, 1],
+                                [14, 0.8],
                                 [20, 0],
                             ],
                         },
