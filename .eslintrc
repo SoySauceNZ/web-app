@@ -6,8 +6,13 @@
         "curly": ["error", "all"],
         "import/prefer-default-export": 0,
         "multiline-comment-style": ["error", "starred-block"],
-        "no-console": "error",
-        "prettier/prettier": "error",
+        "no-console": "warn",
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
         "react/jsx-filename-extension": 0,
         "react/jsx-props-no-spreading": 0,
         "react/state-in-constructor": 0,

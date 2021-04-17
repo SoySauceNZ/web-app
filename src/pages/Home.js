@@ -16,7 +16,8 @@ import {
     Popover,
 } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TrafficIcon from '@material-ui/icons/Traffic';
@@ -163,8 +164,29 @@ const AccordionMenu = memo(
         handleIlluminationChangeCommited,
     }) => {
         const [expanded, setExpanded] = useState('panel1');
+        const history = useHistory();
+
         const handlePanelChange = (panel) => (event, isExpanded) => {
             setExpanded(isExpanded ? panel : false);
+        };
+
+        const onFileChange = (event) => {
+            const file = event.target.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            const config = {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            };
+
+            axios
+                .post(`${process.env.REACT_APP_API}/upload`, formData, config)
+                .then((res) => {
+                    history.push(`/upload?file=${res.data.filename}`);
+                })
+                .catch((err) => {
+                    alert(`Upload Error: ${err}`);
+                    console.log(err);
+                });
         };
 
         return (
@@ -220,25 +242,28 @@ const AccordionMenu = memo(
                                     crash severity
                                 </Typography>
                                 <br />
-                                <input
-                                    accept="image/*"
-                                    className={classes.input}
-                                    style={{ display: 'none' }}
-                                    id="raised-button-file"
-                                    multiple
-                                    type="file"
-                                />
-                                <label htmlFor="raised-button-file">
-                                    <center>
-                                        <Button
-                                            variant="contained"
-                                            component="span"
-                                            color="primary"
-                                        >
-                                            Upload
-                                        </Button>
-                                    </center>
-                                </label>
+                                <form>
+                                    <input
+                                        accept="image/*"
+                                        className={classes.input}
+                                        style={{ display: 'none' }}
+                                        id="raised-button-file"
+                                        multiple
+                                        type="file"
+                                        onChange={onFileChange}
+                                    />
+                                    <label htmlFor="raised-button-file">
+                                        <center>
+                                            <Button
+                                                variant="contained"
+                                                component="span"
+                                                color="primary"
+                                            >
+                                                Upload
+                                            </Button>
+                                        </center>
+                                    </label>
+                                </form>
                                 <br />
                             </Grid>
                             <br />
