@@ -24,7 +24,6 @@ import TrafficIcon from '@material-ui/icons/Traffic';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 
 import HeatMap from '../components/HeatMap';
-import trees from '../assets/trees.geojson';
 import InputSelector from '../components/InputSelector';
 import SliderSelector from '../components/SliderSelector';
 
@@ -88,18 +87,14 @@ const severity = {
 
 const weatherOptions = {
     Fine: 'F',
-    'Hail or Sleet': 'HS',
     'Light rain': 'LR',
     'Heavy rain': 'HR',
-    'Mist or Fog': 'MF',
-    Snow: 'S',
 };
 
 const lightingConditions = {
-    'Bright sun': 'B',
-    Dark: 'D',
-    Overcast: 'O',
-    Twilight: 'T',
+    'Bright sun': '1.0',
+    Dark: '0.0',
+    'In-between': '0.5',
 };
 
 const weatherArray = Object.keys(weatherOptions);
@@ -107,39 +102,68 @@ const lightingArray = Object.keys(lightingConditions);
 
 const Home = () => {
     const classes = useStyles();
-    const [weather, setWeather] = useState(weatherArray[0]);
-    const [lighting, setLighting] = useState(lightingArray[0]);
-    const [speedLimit, setSpeedLimit] = useState(60);
+    const [state, setState] = useState({
+        weather: weatherArray[0],
+        lighting: lightingArray[0],
+        speedLimit: 50,
+        // eslint-disable-next-line
+        data:
+            'https://raw.githubusercontent.com/SoySauceNZ/geojson/main/F_0.0_100.geojson',
+    });
+
+    const generateDataUrl = () => {
+        const baseUrl = process.env.GEOJSON_BASE_URL;
+        const weather = weatherOptions[state.weather];
+        const lighting = lightingConditions[state.lighting];
+        const filename = `${weather}_${lighting}_${state.speedLimit}`;
+        return `${baseUrl}/${filename}.geojson`;
+    };
 
     const handleWeatherChange = (e) => {
-        setWeather(e.target.value);
+        setState((prevState) => ({
+            ...prevState,
+            weather: e.target.value,
+            data: generateDataUrl(),
+        }));
     };
+
     const handleLightingChange = (e) => {
-        setLighting(e.target.value);
+        setState((prevState) => ({
+            ...prevState,
+            lighting: e.target.value,
+            data: generateDataUrl(),
+        }));
     };
 
     const handleSpeedLimitChange = (e, value) => {
-        setSpeedLimit(value);
+        setState((prevState) => ({
+            ...prevState,
+            speedLimit: value,
+        }));
     };
 
     const handleIlluminationChangeCommited = (e, value) => {
-        // TODO: Update the heatmap
+        setState((prevState) => ({
+            ...prevState,
+            speedLimit: value,
+            data: generateDataUrl(),
+        }));
     };
 
     return (
         <>
             <Box className={classes.map}>
-                <HeatMap center={[-79.999732, 40.4374]} data={trees} />
+                <HeatMap data={state.data} />
             </Box>
             <Container maxWidth="sm">
                 <Paper elevation={12} className={classes.controls}>
                     <AccordionMenu
                         classes={classes}
-                        weather={weather}
+                        weather={state.weather}
                         handleWeatherChange={handleWeatherChange}
-                        lighting={lighting}
+                        lighting={state.lighting}
                         handleLightingChange={handleLightingChange}
-                        speedLimit={speedLimit}
+                        speedLimit={state.speedLimit}
                         handleSpeedLimitChange={handleSpeedLimitChange}
                         handleIlluminationChangeCommited={
                             handleIlluminationChangeCommited
@@ -225,10 +249,10 @@ const AccordionMenu = memo(
                                 className={classes.sliderLabel}
                                 label="Speed (km/h)"
                                 id="speed-selector"
-                                max={120}
-                                min={0}
-                                defaultValue={60}
-                                step={10}
+                                max={100}
+                                min={50}
+                                defaultValue={50}
+                                step={50}
                                 value={speedLimit}
                                 onChange={handleSpeedLimitChange}
                                 onChangeCommitted={
