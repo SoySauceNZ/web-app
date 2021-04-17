@@ -6,7 +6,7 @@ import CSP from '../assets/CSP.png';
 
 const useStyles = makeStyles((theme) => ({
     backButton: {
-        position: 'absolute',
+        position: 'fixed',
         width: 100,
         height: 100,
         bottom: theme.spacing(4),
