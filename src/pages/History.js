@@ -9,6 +9,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import BackButton from '../components/BackButton';
 
 const useStyles = makeStyles((theme) => ({
     cardButton: {
@@ -55,6 +56,7 @@ const History = () => {
                     </Grid>
                 ))}
             </Grid>
+            <BackButton />
         </Container>
     );
 };

@@ -6,6 +6,7 @@ import { useLocation } from 'react-router';
 import example from '../assets/191.png';
 import InputSelector from '../components/InputSelector';
 import SliderSelector from '../components/SliderSelector';
+import BackButton from '../components/BackButton';
 
 const styles = (theme) => ({
     cardTitle: {
@@ -128,6 +129,7 @@ const Upload = ({ classes }) => {
                     Severity: {severity}
                 </Typography>
             </Grid>
+            <BackButton />
         </Grid>
     );
 };

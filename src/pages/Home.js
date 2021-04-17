@@ -20,10 +20,10 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import TrafficIcon from '@material-ui/icons/Traffic';
 import PermMediaIcon from '@material-ui/icons/PermMedia';
 import InfoIcon from '@material-ui/icons/Info';
 
+import CSP from '../assets/CSP.png';
 import HeatMap from '../components/HeatMap';
 import InputSelector from '../components/InputSelector';
 import SliderSelector from '../components/SliderSelector';
@@ -359,7 +359,7 @@ const LogoButton = memo(({ className }) => {
                 className={className}
                 onClick={handleClick}
             >
-                <TrafficIcon style={{ height: 60, width: 60 }} />
+                <img alt="CSP" src={CSP} style={{ height: 60, width: 60 }} />
             </Button>
             <Popover
                 id={id}
