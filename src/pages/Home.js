@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import {
     Box,
     Button,
@@ -189,7 +189,14 @@ const AccordionMenu = memo(
         handleIlluminationChangeCommited,
     }) => {
         const [expanded, setExpanded] = useState('panel1');
+        const [image, setImage] = useState(null);
         const history = useHistory();
+
+        useEffect(() => {
+            axios.get(`${process.env.REACT_APP_API}/list`).then(({ data }) => {
+                setImage(data[data.length - 1]);
+            });
+        }, []);
 
         const handlePanelChange = (panel) => (event, isExpanded) => {
             setExpanded(isExpanded ? panel : false);
@@ -290,6 +297,37 @@ const AccordionMenu = memo(
                                     </label>
                                 </form>
                                 <br />
+
+                                {image !== null ? (
+                                    <center>
+                                        <Typography>
+                                            Last Uploaded Image to Server
+                                        </Typography>
+
+                                        <Button
+                                            component={Link}
+                                            to={`/upload?file=${image}`}
+                                            style={{
+                                                borderRadius: 10,
+                                                padding: 0,
+                                                overflow: 'hidden',
+                                                width: '60%',
+                                            }}
+                                        >
+                                            <img
+                                                alt={image}
+                                                src={`${process.env.REACT_APP_API}/images/${image}`}
+                                                style={{
+                                                    width: '100%',
+                                                }}
+                                            />
+                                        </Button>
+
+                                        <Typography>
+                                            More tab below for more History
+                                        </Typography>
+                                    </center>
+                                ) : null}
                             </Grid>
                             <br />
                         </Grid>
