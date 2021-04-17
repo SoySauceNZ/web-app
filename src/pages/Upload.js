@@ -73,7 +73,7 @@ const Upload = ({ classes }) => {
 
     return (
         <Grid container>
-            <Grid item sm={6}>
+            <Grid item xs={12} sm={6}>
                 <img
                     alt="uploaded"
                     src={example}
@@ -81,10 +81,12 @@ const Upload = ({ classes }) => {
                         background: 'black',
                         width: '100%',
                         height: 'auto',
+                        borderRadius: 10,
+                        margin: 10,
                     }}
                 />
             </Grid>
-            <Grid className={classes.options} item sm={6}>
+            <Grid className={classes.options} item xs={12} sm={6}>
                 <Typography className={classes.cardTitle} variant="h5">
                     Crash Severity
                 </Typography>

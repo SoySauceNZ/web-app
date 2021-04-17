@@ -21,7 +21,8 @@ import axios from 'axios';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TrafficIcon from '@material-ui/icons/Traffic';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import PermMediaIcon from '@material-ui/icons/PermMedia';
+import InfoIcon from '@material-ui/icons/Info';
 
 import HeatMap from '../components/HeatMap';
 import InputSelector from '../components/InputSelector';
@@ -311,11 +312,11 @@ const AccordionMenu = memo(
                         <ListItem
                             button
                             component={Link}
-                            to="/about"
+                            to="/history"
                             key="Upload History"
                         >
                             <ListItemIcon>
-                                <InboxIcon />
+                                <PermMediaIcon />
                             </ListItemIcon>
                             <ListItemText primary="Upload History" />
                         </ListItem>
@@ -326,7 +327,7 @@ const AccordionMenu = memo(
                             key="About us"
                         >
                             <ListItemIcon>
-                                <InboxIcon />
+                                <InfoIcon />
                             </ListItemIcon>
                             <ListItemText primary="About SoySauceNZ" />
                         </ListItem>
