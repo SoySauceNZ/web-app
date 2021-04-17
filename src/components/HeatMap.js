@@ -61,8 +61,8 @@ const HeatMap = ({ classes, data, type, center, zoom }) => {
                         },
                         'heatmap-radius': {
                             stops: [
-                                [11, 15],
-                                [15, 20],
+                                [11, 40],
+                                [15, 60],
                             ],
                         },
                         'heatmap-opacity': {
