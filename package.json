@@ -1,0 +1,61 @@
+{
+    "name": "frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "pre-commit": "pretty-quick --staged",
+        "prepare": "husky install"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.11.3",
+        "@material-ui/icons": "^4.11.2",
+        "@testing-library/jest-dom": "^5.11.10",
+        "@testing-library/react": "^11.2.6",
+        "@testing-library/user-event": "^12.8.3",
+        "mapbox-gl": "^2.2.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-router": "^5.2.0",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "4.0.3",
+        "tiff.js": "^1.0.0",
+        "web-vitals": "^1.1.1",
+        "worker-loader": "^3.0.8"
+    },
+    "devDependencies": {
+        "eslint": "^7.23.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-prettier": "^8.1.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-react": "^7.23.1",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "husky": "^6.0.0",
+        "prettier": "^2.2.1",
+        "prettier-eslint": "^12.0.0",
+        "pretty-quick": "^3.1.0"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}
